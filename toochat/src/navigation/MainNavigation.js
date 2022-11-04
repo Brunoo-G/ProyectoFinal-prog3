@@ -14,10 +14,8 @@ class MainNavigation extends Component {
             initialScreen:'Login'
         }
     }
-
     
-    render(){
-        
+    render(){  
         return (
           <NavigationContainer>
               <Stack.Navigator
@@ -46,6 +44,5 @@ class MainNavigation extends Component {
         )
     }
 }
-
 
 export default MainNavigation
