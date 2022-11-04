@@ -31,7 +31,7 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Login</Text>
+        <Text style={styles.title}>Iniciar sesión</Text>
         <View>
             <TextInput
              style={ styles.input}
@@ -47,14 +47,14 @@ class Login extends Component {
             />
             <View>
                 <TouchableOpacity onPress={()=> this.loguear(this.state.email, this.state.clave)}>
-                    <Text>Loguearme</Text>
+                    <Text style={styles.botton}>Entrar</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
-                <Text>Aun no tienes una cuenta?</Text>
+                <Text>¿Aún no tienes una cuenta?</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Register') }>
-                    <Text>Registrate</Text>
+                    <Text style={styles.register}>Registrate</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -69,8 +69,39 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         paddingHorizontal:32
     },
+    
+    title:{
+        textAlign: 'center',
+        fontSize: 25,
+        marginBottom: 15,
+        fontWeight: 'bold',
+        color: '#0095F6',
+    },
+    
     input:{
-        borderWidth:1
+        borderColor: '#ccc',
+        borderWidth: 2,
+        marginBottom: 10,
+        padding: 10,
+        fontSize: 15,
+        borderRadius: 5,
+    },
+
+    botton:{
+        textAlign: 'center',
+        backgroundColor: '#0095F6',
+        padding: 5,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        marginBottom: 5,
+        fontWeight: 'bold',
+        color:'#FFFFFF',
+    },
+
+    register:{
+        color: '#0095F6',
+        fontWeight: 'bold'
     }
 })
 

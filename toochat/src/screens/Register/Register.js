@@ -25,7 +25,7 @@ class Register extends Component {
         return (
         <View style={styles.container}>
             <View>
-                <Text>Register</Text>
+                <Text style={styles.title}>Completa el formulario</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Escribi tu email'
@@ -53,14 +53,14 @@ class Register extends Component {
                 />
                 <View>
                     <TouchableOpacity onPress={()=> this.registrar(this.state.email, this.state.clave)}>
-                        <Text>Registrar usuario</Text>
+                        <Text style={styles.botton}>Registrarme</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View>
-                    <Text>Ya tienes una cuenta?</Text>
+                    <Text>¿Ya tienes una cuenta?</Text>
                     <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')}>
-                        <Text>Logueate</Text>
+                        <Text style={styles.loguin}>Iniciar sesión</Text>
                     </TouchableOpacity>
                 </View>
                 {
@@ -80,8 +80,39 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         paddingHorizontal:32
     },
+
     input:{
-        borderWidth:1
+        borderColor: '#ccc',
+        borderWidth: 2,
+        marginBottom: 10,
+        padding: 10,
+        fontSize: 15,
+        borderRadius: 5,
+    },
+
+    title:{
+        textAlign: 'center',
+        fontSize: 24,
+        marginBottom: 15,
+        fontWeight: 'bold',
+        color: '#0095F6',
+    },
+
+    botton:{
+        textAlign: 'center',
+        backgroundColor: '#0095F6',
+        padding: 5,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        marginBottom: 5,
+        fontWeight: 'bold',
+        color:'#FFFFFF'
+    },
+
+    loguin:{
+        color: '#0095F6',
+        fontWeight: 'bold'
     }
 })
 
