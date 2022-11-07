@@ -33,25 +33,49 @@ class Profile extends Component {
 
   render() {
     return (
-      <View>
+      <>
+      <View style={styles.cage}>
+        <Text style={styles.foto}>Aca va a ir la foto</Text>
         <Text style={styles.text}>Email: {this.state.misDatos.email}</Text>
         <Text style={styles.text}>Usuario: {this.state.misDatos.usuario}</Text>
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>
-        <TouchableOpacity onPress={()=> this.cerrarSesion()}>
-          <Text>Cerrar sesión</Text>
+      </View>
+      <View>
+      <TouchableOpacity onPress={()=> this.cerrarSesion()}>
+          <Text style={styles.botton}>Cerrar sesión</Text>
         </TouchableOpacity>
       </View>
+      </>
     )
   } 
 }
 
 const styles = StyleSheet.create({
+  foto:{
+    flex: 4, 
+    backgroundColor: 'green'
+  },
   text:{
+    flex: 2,
     textAlign: 'center',
     fontSize: 24,
     marginBottom: 15,
     fontWeight: 'bold',
     color: '#0095F6',
+  },
+  botton:{
+    textAlign: 'center',
+    backgroundColor: '#0095F6',
+    padding: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginBottom: 5,
+    fontWeight: 'bold',
+    color:'#FFFFFF'
+  },
+  cage:{
+    backgroundColor: 'black',
   }
 })
 
