@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
-import { auth } from '../../firebase/config'
+import { db,  auth } from '../../firebase/config'
 
 class Register extends Component {
 
@@ -17,6 +17,15 @@ class Register extends Component {
 
     registrar(email, clave){
         auth.createUserWithEmailAndPassword(email, clave)
+        .then(resp => {
+            db.collection('users').add({
+                email: auth.currentUser.email,
+                usuario: this.state.usuario,
+                createdAt: Date.now(), 
+                clave: this.state.clave,
+                biografia: this.state.biografia
+            })
+        })
         .then( resp => this.props.navigation.navigate('TabNavigation'))
         .catch( err => this.setState({error:err.message}))
     }

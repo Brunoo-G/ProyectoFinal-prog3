@@ -1,5 +1,6 @@
 import { Text, View, TouchableOpacity} from 'react-native'
 import React, { Component } from 'react'
+import {auth} from '../../firebase/config'
 
 class Profile extends Component {
   
@@ -12,6 +13,8 @@ class Profile extends Component {
 
   cerrarSesion(){
     auth.signOut()
+    .then( resp => this.props.navigation.navigate('Login'))
+    .catch(err => console.log(err))
   } 
 
   render() {
@@ -19,7 +22,7 @@ class Profile extends Component {
       <View>
         <Text>Profile</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.cerrarSesion()}>
           <Text>Cerrar sesión</Text>
         </TouchableOpacity>
       </View>

@@ -10,7 +10,8 @@ class Login extends Component {
         this.state={
             email:'',
             clave:'',
-            logueado: false
+            logueado: false,
+            error: ''
         }
     }
 
@@ -20,12 +21,13 @@ class Login extends Component {
                 this.props.navigation.navigate('TabNavigation')
             }
         })
+        // auth.signOut()
     }
 
     loguear(email, clave){
         auth.signInWithEmailAndPassword(email, clave)
         .then( resp => this.props.navigation.navigate('TabNavigation'))
-        .catch(err => console.log(err))
+        .catch( err => this.setState({error:err.message}))
     }
 
   render() {
@@ -44,6 +46,7 @@ class Login extends Component {
              onChangeText={ text => this.setState( {clave:text} )}
              placeholder='Ingresa tu clave'
              value={this.state.clave}
+             secureTextEntry={true}
             />
             <View>
                 <TouchableOpacity onPress={()=> this.loguear(this.state.email, this.state.clave)}>
@@ -57,6 +60,11 @@ class Login extends Component {
                     <Text style={styles.register}>Registrate</Text>
                 </TouchableOpacity>
             </View>
+            {
+                    this.state.error !== '' ?
+                    <Text>{this.state.error}</Text>:
+                    ''
+            }
         </View>
       </View>
     )
