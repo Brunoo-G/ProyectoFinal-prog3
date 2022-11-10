@@ -21,7 +21,6 @@ class Login extends Component {
                 this.props.navigation.navigate('TabNavigation')
             }
         })
-        // auth.signOut()
     }
 
     loguear(email, clave){
