@@ -1,6 +1,7 @@
-import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native'
 import React, { Component } from 'react'
 import {db, auth} from '../../firebase/config'
+import Post from '../../components/Post/Post'
 
 class Profile extends Component {
   
@@ -8,7 +9,8 @@ class Profile extends Component {
     super()
     this.state={
       misDatos: {},
-      id:''
+      id:'',
+      posteos: [],
     }
   }
 
@@ -21,6 +23,20 @@ class Profile extends Component {
         misDatos: doc.data()
       })) 
     })
+    db.collection('posts')
+    // .where('usuario', '==', auth.currentUser.usuario)
+    .onSnapshot(docs => {
+      let posts = []
+      docs.forEach(doc => {
+          posts.push({
+              id: doc.id,
+              data: doc.data()
+          })
+      })
+      this.setState({
+          posteos: posts
+      })
+  })
   }
 
   cerrarSesion(){
@@ -36,21 +52,28 @@ class Profile extends Component {
       <>
       <View style={styles.container}>
         <Text style={styles.text}>{this.state.misDatos.email}</Text>
-
         <View style={styles.card}>
           <Image style={styles.image}
             source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
             resizeMode = 'cover'
           />
           <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
-        </View>
-              
-        <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>
-        
-        <TouchableOpacity onPress={()=> this.cerrarSesion()}>
-          <Text style={styles.botton}>Cerrar sesión</Text>
-        </TouchableOpacity>
+        </View>      
+        <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>   
       </View>
+
+      <View style={styles.container}>
+        <Text>Posteos</Text>
+        <FlatList 
+        data = {this.state.posteos}
+        keyExtractor = {(item) => item.id.toString()}
+        renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
+        />
+      </View>
+
+      <TouchableOpacity onPress={()=> this.cerrarSesion()}>
+        <Text style={styles.botton}>Cerrar sesión</Text>
+      </TouchableOpacity>
       
       </>
     )
