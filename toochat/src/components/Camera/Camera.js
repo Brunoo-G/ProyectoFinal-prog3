@@ -64,7 +64,7 @@ class Camara extends Component {
             <>
                 <Camera
                     style={styles.camara}
-                    type={Camera.Constants.Type.back}
+                    type={Camera.Constants.Type.front}
                     ref={metodosDelComponente => this.metodosCamara = metodosDelComponente}
                 />
                 <TouchableOpacity onPress={()=> this.tomarFoto()}>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
 
     camara:{
-        height: 200
+        height: 500
     },
 
     image:{

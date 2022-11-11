@@ -9,7 +9,8 @@ class Post extends Component {
         super(props)
         this.state = {
             like: false,
-            cantidadLikes: props.data.likes.length 
+            cantidadLikes: props.data.likes.length,
+            cantidadComentarios: props.data.comentarios.length
         }
     }
 
@@ -49,12 +50,18 @@ class Post extends Component {
         .catch(err => console.log(err))
     }
 
+
+
   render() {
     return (
       <View style={styles.container}>
 
-        <View>
-            <Text style={styles.text}>{this.props.data.usuario}</Text>
+        <View style={styles.profile}>
+            <Image style={styles.imageProfile}
+                source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
+                resizeMode = 'cover'
+            />  
+            <Text style={styles.textProfile}>{this.props.data.usuario}</Text>
         </View>
 
         <Image style={styles.image}
@@ -78,14 +85,25 @@ class Post extends Component {
             <Ionicons name="ios-chatbubble-outline"  color="black" size={30} />
         </TouchableOpacity>
         </View>
-        <Text style={styles.text}>{this.state.cantidadLikes} Me gusta</Text>
 
-        <View style={styles.cardDescripcion}>
-            <Text style={styles.text}>{this.props.data.usuario}:</Text>
-            <Text style={styles.descripcion}>{this.props.data.descripcion}</Text>  
-        </View>
-      
-      
+        <Text style={styles.text}>{this.state.cantidadLikes} Me gusta</Text>
+        <Text style={styles.descripcion}>{this.props.data.descripcion}</Text> 
+
+        {
+            this.state.cantidadComentarios === 0 ? ''
+            :
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { //Preguntar
+                screen: 'Comments',
+                params: {
+                    comentarios: this.props.data.comentarios
+                }
+            })}>
+                <Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
+            </TouchableOpacity> 
+        }
+
+        <Text>{this.props.data.comentarios}</Text>
+        
       </View>
     )
   }
@@ -94,35 +112,56 @@ class Post extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1, 
-        marginTop: 30
+        marginBottom: 10, 
+        padding: 12,
+        paddingTop: 0,
+        borderTopWidth: 1,
+        borderRadius: 10,
+        borderColor: '#B5B5B5'
     },
 
     text:{
         fontWeight: 'bold',
         marginLeft: 5,
-        fontSize: 20
+        fontSize: 15
     },
 
     descripcion:{
         marginLeft: 5,
-        fontSize: 20
-    },
-
-    cardDescripcion:{
-        flexDirection: 'row'
+        fontSize: 16
     },
 
     image:{
         height: 270,
-        marginTop: 5,
         marginBottom: 5,
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 10
     },
 
     botones:{
         marginLeft: 10, 
         flexDirection: 'row',
-    }
+    },
+
+    profile:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 6,
+    },
+
+    imageProfile:{
+        height: 43,
+        width: 43,
+        borderRadius: 1000
+    },
+
+    textProfile:{
+        fontWeight: 'bold',
+        marginLeft: 10,
+        marginBottom: 2.5,
+        fontSize: 16,
+    },
+
 
 })
 

@@ -1,11 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import Home from '../screens/Home/Home'
 import { Ionicons, Entypo, FontAwesome } from '@expo/vector-icons'
 import Profile from '../screens/Profile/Profile'
 import Search from '../screens/Search/Search'
 import NewPosts from '../screens/NewPost/NewPost'
-
+import HomeNavigation from './HomeNavigation'
 
 const Tab = createBottomTabNavigator()
 
@@ -14,8 +13,8 @@ export default function TabNavigation() {
     <Tab.Navigator screenOptions={{tabBarShowLabel: false}}>
 
         <Tab.Screen 
-        name={'Home'} 
-        component={Home}
+        name={'HomeNavigation'} 
+        component={HomeNavigation}
         options={{
           tabBarIcon: () => <Ionicons name='ios-home' color={'#0095F6'} size={35} />,
           headerShown:false

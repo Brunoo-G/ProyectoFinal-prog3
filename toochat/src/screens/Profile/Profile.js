@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet} from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React, { Component } from 'react'
 import {db, auth} from '../../firebase/config'
 
@@ -34,35 +34,46 @@ class Profile extends Component {
   render() {
     return (
       <>
-      <View style={styles.cage}>
-        <Text style={styles.foto}>Aca va a ir la foto</Text>
+      <View style={styles.container}>
+        
+        <View>
+          <Image style={styles.image}
+            source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
+            resizeMode = 'cover'
+          />
+        </View>
+          
+        
         <Text style={styles.text}>Email: {this.state.misDatos.email}</Text>
         <Text style={styles.text}>Usuario: {this.state.misDatos.usuario}</Text>
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>
-      </View>
-      <View>
-      <TouchableOpacity onPress={()=> this.cerrarSesion()}>
+        
+        <TouchableOpacity onPress={()=> this.cerrarSesion()}>
           <Text style={styles.botton}>Cerrar sesión</Text>
         </TouchableOpacity>
       </View>
+      
       </>
     )
   } 
 }
 
 const styles = StyleSheet.create({
-  foto:{
-    flex: 4, 
-    backgroundColor: 'green'
+
+  container:{
+    flex: 1, 
+    justifyContent: 'center',
+    paddingHorizontal: 32
   },
+
   text:{
-    flex: 2,
     textAlign: 'center',
     fontSize: 24,
     marginBottom: 15,
     fontWeight: 'bold',
     color: '#0095F6',
   },
+
   botton:{
     textAlign: 'center',
     backgroundColor: '#0095F6',
@@ -74,8 +85,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color:'#FFFFFF'
   },
-  cage:{
-    backgroundColor: 'black',
+
+  image:{
+    height: 150,
+    width: 150,
+    borderRadius: 1000,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
