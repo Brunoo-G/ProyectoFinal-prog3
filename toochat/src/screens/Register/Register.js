@@ -1,5 +1,6 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React, { Component } from 'react'
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, Button, Image, Platform } from 'react-native'
+import React, { Component, useState, useEffect } from 'react'
+import * as ImagePicker from 'expo-image-picker';
 import { db,  auth } from '../../firebase/config'
 
 class Register extends Component {
