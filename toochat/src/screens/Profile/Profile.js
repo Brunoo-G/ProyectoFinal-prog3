@@ -35,17 +35,16 @@ class Profile extends Component {
     return (
       <>
       <View style={styles.container}>
-        
-        <View>
+        <Text style={styles.text}>{this.state.misDatos.email}</Text>
+
+        <View style={styles.card}>
           <Image style={styles.image}
             source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
             resizeMode = 'cover'
           />
+          <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
         </View>
-          
-        
-        <Text style={styles.text}>Email: {this.state.misDatos.email}</Text>
-        <Text style={styles.text}>Usuario: {this.state.misDatos.usuario}</Text>
+              
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>
         
         <TouchableOpacity onPress={()=> this.cerrarSesion()}>
@@ -69,9 +68,6 @@ const styles = StyleSheet.create({
   text:{
     textAlign: 'center',
     fontSize: 24,
-    marginBottom: 15,
-    fontWeight: 'bold',
-    color: '#0095F6',
   },
 
   botton:{
@@ -87,12 +83,26 @@ const styles = StyleSheet.create({
   },
 
   image:{
-    height: 150,
-    width: 150,
+    height: 130,
+    width: 130,
     borderRadius: 1000,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+
+  card:{
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  textCard:{
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 20
   }
+
+
 })
 
 

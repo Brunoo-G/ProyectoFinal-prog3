@@ -90,7 +90,7 @@ class Post extends Component {
         <Text style={styles.descripcion}>{this.props.data.descripcion}</Text> 
 
         {
-            this.state.cantidadComentarios === 0 ? ''
+            this.state.cantidadComentarios === 0 ? <Text>Aún no hay comentarios</Text>
             :
             <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { //Preguntar
                 screen: 'Comments',
