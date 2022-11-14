@@ -6,7 +6,6 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 class Post extends Component {
     constructor(props){
-        console.log(props);
         super(props)
         this.state = {
             like: false,
@@ -103,7 +102,7 @@ class Post extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { 
                 screen: 'Comments',
                 params: {
-                
+                    id:this.props.id,
                         comentarios: this.props.data.comentarios
                 }
                 })}><Text style={styles.text}>Agregar comentario</Text> 

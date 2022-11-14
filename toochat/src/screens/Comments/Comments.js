@@ -1,11 +1,11 @@
-import { Text, View, TextInput, StyleSheet, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+import { Text, View, TextInput, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import { db, auth } from '../../firebase/config'
+import Comment from '../../components/Comment/Comment'
 
 class Comments extends Component {
   constructor(props){
-    console.log(props);
     super(props)
     this.state={
       comentario: ''
@@ -14,7 +14,7 @@ class Comments extends Component {
 
   guardarComentario(){
     db.collection('posts')
-    .doc(this.props.route.params.id)
+    .doc(this.props.route.params.id) // falta snapshot
     .update({
       comentarios: firebase.firestore.FieldValue.arrayUnion({
         comentario: this.state.comentario,
@@ -24,9 +24,16 @@ class Comments extends Component {
   }
 
   render() {
+    console.log(this.props.route.params.id);
     return (
       <View style={styles.container}>
-        <Text>comentarios</Text>
+        <Text>Comentarios</Text>
+
+        <FlatList 
+        data = {this.props.route.params.comentarios}
+        keyExtractor = {(item) => item.comentario}
+        renderItem = {({item}) => <Comment data={item}/> }
+        />
 
         <TextInput style={styles.input}
           keyboardType='default'
