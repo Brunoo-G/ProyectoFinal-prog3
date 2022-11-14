@@ -24,7 +24,7 @@ class Profile extends Component {
       })) 
     })
     db.collection('posts')
-    .where('usuario', '==', auth.currentUser.email)
+    .where('email', '==', auth.currentUser.email)
     .onSnapshot(docs => {
       let posts = []
       docs.forEach(doc => {
@@ -44,6 +44,14 @@ class Profile extends Component {
     .then( resp => this.props.navigation.navigate('Login'))
     .catch(err => console.log(err))
   } 
+
+  borrarPosteo(){
+    auth.currentUser.delete()
+        .then( () => {
+            this.props.navigation.navigate("Portada")
+      } )
+
+  }
 
 
 
@@ -72,7 +80,7 @@ class Profile extends Component {
         renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
         />
         :
-        <Text>Aun no hay oublicaciones</Text>
+        <Text>Aun no hay publicaciones</Text>
         }
       </View>
 
