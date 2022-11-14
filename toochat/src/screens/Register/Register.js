@@ -41,7 +41,7 @@ class Register extends Component {
             fetch(resp.uri)
             .then(data => data.blob()) // Paso la uri a BLOB = Binary Large OBject
             .then(image => {
-                const ref = storage.ref(`profilePics/${Date.now()}.jpg`) 
+                const ref = storage.ref(`fotosDePerfil/${Date.now()}.jpg`) // Aclaro donde y como se guarda lo foto en el storage de firebase
                 ref.put(image) 
                 .then(()=> {
                     ref.getDownloadURL() // Recibo la url de la foto
