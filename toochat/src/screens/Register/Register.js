@@ -42,13 +42,13 @@ class Register extends Component {
       pickImage(){
         ImagePicker.launchImageLibraryAsync() // usuario elige entre sus fotos
         .then(resp => {
-            fetch(resp.uri)
+            fetch(resp.uri) 
             .then(data => data.blob()) // Paso la uri a BLOB = Binary Large OBject
             .then(image => {
                 const ref = storage.ref(`fotosDePerfil/${Date.now()}.jpg`) // Aclaro donde y como se guarda lo foto en el storage de firebase
-                ref.put(image) 
+                ref.put(image) // Guardo la imagen en esa ubicación
                 .then(()=> {
-                    ref.getDownloadURL() // Recibo la url de la foto
+                    ref.getDownloadURL() // Recibo la url de la foto para guardarla en la base de datos
                     .then(url => {
                             this.setState({foto:url}) // Guardo la url en el estado
                         }

@@ -26,6 +26,9 @@ class HomeNavigation extends Component {
         <Stack.Screen 
           name='usersProfile'
           component={usersProfile}
+          options={{
+            headerShown:false
+        }}
         />
         
       </Stack.Navigator>
