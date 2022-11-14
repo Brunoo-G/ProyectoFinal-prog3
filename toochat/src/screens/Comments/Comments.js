@@ -1,27 +1,27 @@
-import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, StyleSheet, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import React, { Component } from 'react'
-import { db } from '../../firebase/config'
+import firebase from 'firebase'
+import { db, auth } from '../../firebase/config'
 
 class Comments extends Component {
   constructor(props){
-    super()
+    console.log(props);
+    super(props)
     this.state={
-      comentarios: ''
+      comentario: ''
     }
   }
 
-  componentDidMount(){
-
-  }
-
-  guardarComentario(text){
+  guardarComentario(){
     db.collection('posts')
-    .doc(this.prop.id)
+    .doc(this.props.route.params.id)
     .update({
-      comentarios: []
+      comentarios: firebase.firestore.FieldValue.arrayUnion({
+        comentario: this.state.comentario,
+        usuario: auth.currentUser.email
+      })
     })
   }
-
 
   render() {
     return (
@@ -31,7 +31,7 @@ class Comments extends Component {
         <TextInput style={styles.input}
           keyboardType='default'
           placeholder='Agrega un comentario'
-          onChange={text => this.setState({comentario: text})}
+          onChangeText={text => this.setState({comentario: text})}
           value={this.state.comentario}
         />
         <TouchableOpacity onPress={()=> this.guardarComentario(this.state.descripcion)}>

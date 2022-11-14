@@ -6,6 +6,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 class Post extends Component {
     constructor(props){
+        console.log(props);
         super(props)
         this.state = {
             like: false,
@@ -78,6 +79,7 @@ class Post extends Component {
             <TouchableOpacity style={{marginLeft: 8}} onPress={() => this.props.navigation.navigate('HomeNavigation', {
                     screen: 'Comments',
                     params: {
+                        id:this.props.id,
                         comentarios: this.props.data.comentarios
                     }
                 })}> 
@@ -89,20 +91,29 @@ class Post extends Component {
         <Text style={styles.descripcion}>{this.props.data.descripcion}</Text> 
 
         {
-            this.state.cantidadComentarios === 0 ? <Text>Aún no hay comentarios</Text>
+            this.state.cantidadComentarios === 0 ? 
+            <View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { 
+                screen: 'Comments',
+                params: {
+                
+                        comentarios: this.props.data.comentarios
+                }
+                })}><Text style={styles.text}>Agregar comentario</Text> 
+                </TouchableOpacity>
+
+                <Text>Aún no hay comentarios</Text>
+            </View>
             :
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { //Preguntar
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', {
                 screen: 'Comments',
                 params: {
                     comentarios: this.props.data.comentarios
                 }
-            })}>
-                <Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
+            })}><Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
             </TouchableOpacity> 
         }
-
-        <Text>{this.props.data.comentarios}</Text>
-        
+       
       </View>
     )
   }
