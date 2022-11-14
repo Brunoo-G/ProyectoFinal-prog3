@@ -1,7 +1,9 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, Button, Image, Platform } from 'react-native'
-import React, { Component, useState, useEffect } from 'react'
+import { Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import React, { Component } from 'react'
 import * as ImagePicker from 'expo-image-picker';
 import { db,  auth } from '../../firebase/config'
+import {storage} from '../../firebase/config'
+
 
 class Register extends Component {
 
@@ -12,6 +14,7 @@ class Register extends Component {
             clave:'',
             usuario:'',
             biografia:'',
+            foto:'',
             error:''
         }
     }
@@ -24,12 +27,34 @@ class Register extends Component {
                 usuario: this.state.usuario,
                 createdAt: Date.now(), 
                 clave: this.state.clave,
-                biografia: this.state.biografia
+                biografia: this.state.biografia,
+                foto: this.state.foto
             })
         })
-        .then( resp => this.props.navigation.navigate('TabNavigation'))
+        .then( resp => this.props.navigation.navigate('Login'))
         .catch( err => this.setState({error:err.message}))
     }
+  
+      pickImage(){
+        ImagePicker.launchImageLibraryAsync() // usuario elige entre sus fotos
+        .then(resp => {
+            fetch(resp.uri)
+            .then(data => data.blob()) // Paso la uri a BLOB = Binary Large OBject
+            .then(image => {
+                const ref = storage.ref(`profilePics/${Date.now()}.jpg`) 
+                ref.put(image) 
+                .then(()=> {
+                    ref.getDownloadURL() // Recibo la url de la foto
+                    .then(url => {
+                            this.setState({foto:url}) // Guardo la url en el estado
+                        }
+                    )
+                })
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
+    };
 
     render() {
         return (
@@ -61,6 +86,11 @@ class Register extends Component {
                     onChangeText={text => this.setState({biografia: text})}
                     value={this.state.biografia}
                 />
+                <View>
+                    <TouchableOpacity onPress={()=> this.pickImage()}>
+                        <Text style={styles.botton}>Foto de perfil</Text>
+                    </TouchableOpacity>
+                </View>
                 <View>
                     <TouchableOpacity onPress={()=> this.registrar(this.state.email, this.state.clave)}>
                         <Text style={styles.botton}>Registrarme</Text>
