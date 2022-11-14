@@ -60,7 +60,7 @@ class Post extends Component {
                 params:{
                     email: this.props.data.email
                 }
-            })}>
+             })}>
                 <Text style={styles.textProfile}>{this.props.data.email}</Text>
             </TouchableOpacity>  
         </View>
