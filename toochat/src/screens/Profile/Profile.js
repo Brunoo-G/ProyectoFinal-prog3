@@ -24,7 +24,7 @@ class Profile extends Component {
       })) 
     })
     db.collection('posts')
-    .where('usuario', '==', auth.currentUser.email)
+    .where('email', '==', auth.currentUser.email)
     .onSnapshot(docs => {
       let posts = []
       docs.forEach(doc => {
@@ -45,16 +45,25 @@ class Profile extends Component {
     .catch(err => console.log(err))
   } 
 
+  borrarPosteo(){
+    auth.currentUser.delete()
+        .then( () => {
+            this.props.navigation.navigate("Portada")
+      } )
+
+  }
+
 
 
   render() {
+    console.log(this.state.misDatos)
     return (
       <>
       <View style={styles.container}>
         <Text style={styles.text}>{this.state.misDatos.email}</Text>
         <View style={styles.card}>
           <Image style={styles.image}
-            source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
+            source={{uri: this.state.misDatos.foto}} 
             resizeMode = 'cover'
           />
           <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
@@ -72,7 +81,7 @@ class Profile extends Component {
         renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
         />
         :
-        <Text>Aun no hay oublicaciones</Text>
+        <Text>Aun no hay publicaciones</Text>
         }
       </View>
 

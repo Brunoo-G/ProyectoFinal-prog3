@@ -56,7 +56,14 @@ class Post extends Component {
                 source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
                 resizeMode = 'cover'
             />  
-            <Text style={styles.textProfile}>{this.props.data.email}</Text>
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {
+                screen: 'usersProfile',
+                params:{
+                    email: this.props.data.email
+                }
+            })}>
+                <Text style={styles.textProfile}>{this.props.data.email}</Text>
+            </TouchableOpacity>  
         </View>
 
         <Image style={styles.image}
