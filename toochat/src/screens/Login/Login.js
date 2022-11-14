@@ -35,14 +35,14 @@ class Login extends Component {
         <Text style={styles.title}>Iniciar sesión</Text>
         <View>
             <TextInput
-             style={ styles.input}
-             onChangeText={ text => this.setState( {email:text} )}
+             style={styles.input}
+             onChangeText={ text => this.setState( {email: text} )}
              placeholder='Ingresa tu email'
              value={this.state.email}
             />
             <TextInput
-             style={ styles.input}
-             onChangeText={ text => this.setState( {clave:text} )}
+             style={styles.input}
+             onChangeText={ text => this.setState( {clave: text} )}
              placeholder='Ingresa tu clave'
              value={this.state.clave}
              secureTextEntry={true}

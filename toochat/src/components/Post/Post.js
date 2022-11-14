@@ -14,10 +14,6 @@ class Post extends Component {
         }
     }
 
-    componentDidMount(){
-
-    }
-
     like(){
         db
         .collection('posts')
@@ -50,8 +46,6 @@ class Post extends Component {
         .catch(err => console.log(err))
     }
 
-
-
   render() {
     return (
       <View style={styles.container}>
@@ -61,7 +55,7 @@ class Post extends Component {
                 source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
                 resizeMode = 'cover'
             />  
-            <Text style={styles.textProfile}>{this.props.data.usuario}</Text>
+            <Text style={styles.textProfile}>{this.props.data.email}</Text>
         </View>
 
         <Image style={styles.image}
@@ -70,20 +64,25 @@ class Post extends Component {
         />  
         
         <View style={styles.botones}>
-        {
-            this.state.like ?
-                <TouchableOpacity onPress={()=> this.unlike()}>
-                    <FontAwesome name='heart' color='#0095F6' size={30} />
-                </TouchableOpacity>
-            :
-                <TouchableOpacity onPress={()=> this.like()}>
-                    <FontAwesome name='heart-o' color='black' size={30} />
-                </TouchableOpacity>
-        }
+            {
+                this.state.like ?
+                    <TouchableOpacity onPress={()=> this.unlike()}>
+                        <FontAwesome name='heart' color='#0095F6' size={30} />
+                    </TouchableOpacity>
+                :
+                    <TouchableOpacity onPress={()=> this.like()}>
+                        <FontAwesome name='heart-o' color='black' size={30} />
+                    </TouchableOpacity>
+            }
 
-        <TouchableOpacity style={{marginLeft: 8}}> 
-            <Ionicons name="ios-chatbubble-outline"  color="black" size={30} />
-        </TouchableOpacity>
+            <TouchableOpacity style={{marginLeft: 8}} onPress={() => this.props.navigation.navigate('HomeNavigation', {
+                    screen: 'Comments',
+                    params: {
+                        comentarios: this.props.data.comentarios
+                    }
+                })}> 
+                <Ionicons name="ios-chatbubble-outline"  color="black" size={30} />
+            </TouchableOpacity>
         </View>
 
         <Text style={styles.text}>{this.state.cantidadLikes} Me gusta</Text>

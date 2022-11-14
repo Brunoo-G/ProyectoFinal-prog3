@@ -12,7 +12,7 @@ class Home extends Component {
     }
 
     componentDidMount(){
-        db.collection('posts').onSnapshot(docs => {
+        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(docs => {
             let posts = []
             docs.forEach(doc => {
                 posts.push({
@@ -38,7 +38,7 @@ class Home extends Component {
         <FlatList 
         data = {this.state.posteos}
         keyExtractor = {(item) => item.id.toString()}
-        renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
+        renderItem = {(item) => <Post navigation={this.props.navigation} data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
         />
       </View>
     )

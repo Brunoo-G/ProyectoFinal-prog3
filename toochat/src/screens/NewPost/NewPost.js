@@ -16,7 +16,7 @@ class NewPosts extends Component {
 
     guardarPost(text){
         db.collection('posts').add({
-            usuario: auth.currentUser.email,
+            email: auth.currentUser.email,
             createdAt: Date.now(),
             descripcion: text,
             likes: [],
@@ -40,12 +40,11 @@ class NewPosts extends Component {
                 this.state.mostrarCamara ?
                 <Camera subirFoto={(url)=> this.subirFoto(url)}/> :
                 <>
-                    <TextInput
-                    placeholder='Descripción'
-                    onChangeText={text => this.setState({descripcion: text})}
-                    value={this.state.descripcion}
-                    keyboardType='default'
-                    style={styles.input}
+                    <TextInput  style={styles.input}
+                        placeholder='Descripción'
+                        onChangeText={text => this.setState({descripcion: text})}
+                        value={this.state.descripcion}
+                        keyboardType='default'
                     />
                     <TouchableOpacity onPress={()=> this.guardarPost(this.state.descripcion)}>
                         <Text>Compartir</Text>
