@@ -59,36 +59,34 @@ class Profile extends Component {
     console.log(this.state.misDatos)
     return (
       <>
-      <View style={styles.container}>
-        <Text style={styles.text}>{this.state.misDatos.email}</Text>
+      <View style={styles.containerDatos}>
         <View style={styles.card}>
           <Image style={styles.image}
             source={{uri: this.state.misDatos.foto}} 
             resizeMode = 'cover'
           />
-          <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
+          <Text style={styles.textCard}>Username: {this.state.misDatos.usuario}</Text>
+          <Text style={styles.textCard}>Email: {this.state.misDatos.email}</Text>
         </View>      
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>   
-        <Text>Cantidad de posts: {this.state.posteos.length}</Text>
-      </View>
+        <Text style={styles.text}>Cantidad de posts: {this.state.posteos.length}</Text>
+        <TouchableOpacity onPress={()=> this.cerrarSesion()}>
+          <Text style={styles.botton}>Cerrar sesión</Text>
+        </TouchableOpacity>
 
-      <View style={styles.container}>
-        <Text>Posteos</Text>
+        <Text style={styles.textPublicaciones}>Publicaciones:</Text>
         {this.state.posteos.length >= 1 ? 
-        <FlatList 
+        <View style={styles.publicaciones}>
+          <FlatList 
         data = {this.state.posteos}
         keyExtractor = {(item) => item.id.toString()}
         renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
         />
+        </View>
         :
         <Text>Aun no hay publicaciones</Text>
         }
       </View>
-
-      <TouchableOpacity onPress={()=> this.cerrarSesion()}>
-        <Text style={styles.botton}>Cerrar sesión</Text>
-      </TouchableOpacity>
-      
       </>
     )
   } 
@@ -96,15 +94,27 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
 
-  container:{
+  containerDatos:{
     flex: 1, 
     justifyContent: 'center',
-    paddingHorizontal: 32
+    paddingHorizontal: 32,
+    backgroundColor: '#E0E4EA',
   },
 
+  publicaciones:{
+    flex: 1, 
+  },
+
+
   text:{
-    textAlign: 'center',
-    fontSize: 24,
+    textAlign: 'left',
+    fontSize: 18,
+  },
+
+  textPublicaciones:{
+    textAlign: 'left',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 
   botton:{
@@ -120,23 +130,23 @@ const styles = StyleSheet.create({
   },
 
   image:{
-    height: 130,
-    width: 130,
+    height: 200,
+    width: 200,
     borderRadius: 1000,
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   card:{
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
   },
 
   textCard:{
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 20
+    marginLeft: 25,
   }
 
 

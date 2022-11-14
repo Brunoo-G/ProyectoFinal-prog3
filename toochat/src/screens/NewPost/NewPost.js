@@ -23,7 +23,8 @@ class NewPosts extends Component {
             comentarios: [],
             foto: this.state.fotoUrl
         })
-
+        .then( () => this.props.navigation.navigate('Home'))
+        .catch( err => this.setState({error:err.message}))
     }
 
     subirFoto(url){
