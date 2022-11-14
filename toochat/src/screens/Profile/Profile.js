@@ -24,7 +24,7 @@ class Profile extends Component {
       })) 
     })
     db.collection('posts')
-    // .where('usuario', '==', auth.currentUser.usuario)
+    .where('usuario', '==', auth.currentUser.email)
     .onSnapshot(docs => {
       let posts = []
       docs.forEach(doc => {
@@ -60,15 +60,20 @@ class Profile extends Component {
           <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
         </View>      
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>   
+        <Text>Cantidad de posts: {this.state.posteos.length}</Text>
       </View>
 
       <View style={styles.container}>
         <Text>Posteos</Text>
+        {this.state.posteos.length >= 1 ? 
         <FlatList 
         data = {this.state.posteos}
         keyExtractor = {(item) => item.id.toString()}
         renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
         />
+        :
+        <Text>Aun no hay oublicaciones</Text>
+        }
       </View>
 
       <TouchableOpacity onPress={()=> this.cerrarSesion()}>
