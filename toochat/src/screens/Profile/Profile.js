@@ -56,13 +56,14 @@ class Profile extends Component {
 
 
   render() {
+    console.log(this.state.misDatos)
     return (
       <>
       <View style={styles.container}>
         <Text style={styles.text}>{this.state.misDatos.email}</Text>
         <View style={styles.card}>
           <Image style={styles.image}
-            source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
+            source={{uri: this.state.misDatos.foto}} 
             resizeMode = 'cover'
           />
           <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>

@@ -20,6 +20,10 @@ class Register extends Component {
     }
 
     registrar(email, clave){
+        if (this.state.usuario == '') {
+            this.setState({error:"El usuario no puede quedar vacío"})
+          }
+        else {
         auth.createUserWithEmailAndPassword(email, clave)
         .then(resp => {
             db.collection('users').add({
@@ -33,7 +37,7 @@ class Register extends Component {
         })
         .then( resp => this.props.navigation.navigate('Login'))
         .catch( err => this.setState({error:err.message}))
-    }
+    }}
   
       pickImage(){
         ImagePicker.launchImageLibraryAsync() // usuario elige entre sus fotos
