@@ -5,12 +5,13 @@ import Post from '../../components/Post/Post'
 
 class usersProfile extends Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
           misDatos: {},
           id:'',
           posteos: [],
+          loader: true
         }
     }
 
@@ -24,7 +25,7 @@ class usersProfile extends Component {
           })) 
         })
         db.collection('posts')
-        .where('usuario', '==', this.props.route.params.email)
+        .where('email', '==', this.props.route.params.email)
         .onSnapshot(docs => {
           let posts = []
           docs.forEach(doc => {
@@ -33,8 +34,10 @@ class usersProfile extends Component {
                   data: doc.data()
               })
           })
+          console.log(posts)
           this.setState({
-              posteos: posts
+              posteos: posts,
+              loader: false
           })
       })
     }
@@ -42,6 +45,7 @@ class usersProfile extends Component {
 
   render() {
     return (
+        this.state.loader ? <Text>Cargandooo</Text> :
         <>
         <View style={styles.container}>
           <Text style={styles.text}>{this.state.misDatos.email}</Text>
