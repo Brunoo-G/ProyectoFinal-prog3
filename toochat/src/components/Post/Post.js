@@ -102,7 +102,7 @@ class Post extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { 
                 screen: 'Comments',
                 params: {
-                    id:this.props.id,
+                        id: this.props.id,
                         comentarios: this.props.data.comentarios
                 }
                 })}><Text style={styles.text}>Agregar comentario</Text> 
@@ -114,6 +114,7 @@ class Post extends Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', {
                 screen: 'Comments',
                 params: {
+                    id: this.props.id,
                     comentarios: this.props.data.comentarios
                 }
             })}><Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
