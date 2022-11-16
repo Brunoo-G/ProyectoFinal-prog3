@@ -39,13 +39,13 @@ class Search extends Component {
         let usersFilter = this.state.data.filter(elm =>
         {  
           
-          console.log( elm.data.usuario.toUpperCase().includes(text.toUpperCase()));
+          
          return elm.data.usuario.toUpperCase().includes(text.toUpperCase())})
 
-        console.log(usersFilter);
-        this.setState({
-          users: usersFilter,
-          user: text,
+         console.log(usersFilter);
+         this.setState({
+           users: usersFilter,
+           user: text,
         })
     }
 
@@ -67,7 +67,22 @@ class Search extends Component {
             <FlatList
               data={this.state.users}
               keyExtractor={(item) => item.id}
-              renderItem= {({item}) => <Text>{item.data.usuario}</Text>}
+              renderItem= {({item}) => <View>
+                
+                
+                
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {
+                  screen: 'usersProfile',
+                  params:{
+                  email: this.props.data.email
+                  }})}>
+                  <Text>{item.data.usuario}</Text>
+                </TouchableOpacity>  
+                
+                
+                
+                
+                </View>}
             /> 
              
         </View>
