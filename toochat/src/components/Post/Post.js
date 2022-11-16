@@ -7,7 +7,6 @@ import { AntDesign } from '@expo/vector-icons';
 
 class Post extends Component {
     constructor(props){
-        console.log(props);
         super(props)
         this.state = {
             like: false,
@@ -123,7 +122,7 @@ class Post extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { 
                 screen: 'Comments',
                 params: {
-                
+                        id: this.props.id,
                         comentarios: this.props.data.comentarios
                 }
                 })}><Text style={styles.text}>Agregar comentario</Text> 
@@ -135,6 +134,7 @@ class Post extends Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', {
                 screen: 'Comments',
                 params: {
+                    id: this.props.id,
                     comentarios: this.props.data.comentarios
                 }
             })}><Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     },
 
     image:{
-        height: 270,
+        height: 370,
         marginBottom: 5,
         alignItems: 'center',
         borderRadius: 10

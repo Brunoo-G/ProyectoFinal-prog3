@@ -23,7 +23,8 @@ class NewPosts extends Component {
             comentarios: [],
             foto: this.state.fotoUrl
         })
-
+        .then( () => this.props.navigation.navigate('Home'))
+        .catch( err => this.setState({error:err.message}))
     }
 
     subirFoto(url){
@@ -47,7 +48,7 @@ class NewPosts extends Component {
                         keyboardType='default'
                     />
                     <TouchableOpacity onPress={()=> this.guardarPost(this.state.descripcion)}>
-                        <Text>Compartir</Text>
+                        <Text style={styles.button}>Compartir</Text>
                     </TouchableOpacity>
                 </>
             }
@@ -58,13 +59,31 @@ class NewPosts extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        justifyContent: 'center'
     },
     
     input:{
-        height: 32,
-        borderWidth: 1
-    }
+        borderColor: '#ccc',
+        borderWidth: 2,
+        marginBottom: 5,
+        padding: 10,
+        fontSize: 15,
+        borderRadius: 5,
+    },
+
+    button:{
+        textAlign: 'center',
+        backgroundColor: '#0095F6',
+        padding: 5,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        marginBottom: 5,
+        fontWeight: 'bold',
+        color:'#FFFFFF',
+        fontSize: 17
+    },
 })
 
 export default NewPosts

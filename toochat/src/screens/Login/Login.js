@@ -49,7 +49,7 @@ class Login extends Component {
             />
             <View>
                 <TouchableOpacity onPress={()=> this.loguear(this.state.email, this.state.clave)}>
-                    <Text style={styles.botton}>Entrar</Text>
+                    <Text style={styles.button}>Entrar</Text>
                 </TouchableOpacity>
             </View>
 
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 
-    botton:{
+    button:{
         textAlign: 'center',
         backgroundColor: '#0095F6',
         padding: 5,
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         fontWeight: 'bold',
         color:'#FFFFFF',
+        fontSize: 17,
     },
 
     register:{
