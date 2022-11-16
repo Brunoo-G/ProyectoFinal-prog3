@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
 
     image:{
-        height: 270,
+        height: 370,
         marginBottom: 5,
         alignItems: 'center',
         borderRadius: 10

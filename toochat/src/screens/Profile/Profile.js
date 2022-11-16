@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: 5,
     fontWeight: 'bold',
-    color:'#FFFFFF'
+    color:'#FFFFFF',
+    fontSize: 17,
   },
 
   image:{
