@@ -44,17 +44,7 @@ class Profile extends Component {
     .then( resp => this.props.navigation.navigate('Login'))
     .catch(err => console.log(err))
   } 
-
-  borrarPosteo(){
-    auth.currentUser.delete()
-        .then( () => {
-            this.props.navigation.navigate("Portada")
-      } )
-
-  }
-
-
-
+  
   render() {
     console.log(this.state.misDatos)
     return (
@@ -65,8 +55,10 @@ class Profile extends Component {
             source={{uri: this.state.misDatos.foto}} 
             resizeMode = 'cover'
           />
-          <Text style={styles.textCard}>Username: {this.state.misDatos.usuario}</Text>
-          <Text style={styles.textCard}>Email: {this.state.misDatos.email}</Text>
+          <View>
+            <Text style={styles.textCard}>Username: {this.state.misDatos.usuario}</Text>
+            <Text style={styles.textCard}>Email: {this.state.misDatos.email}</Text>
+          </View>
         </View>      
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>   
         <Text style={styles.text}>Cantidad de posts: {this.state.posteos.length}</Text>
@@ -102,18 +94,18 @@ const styles = StyleSheet.create({
   },
 
   publicaciones:{
-    flex: 1, 
+    flex: 8, 
   },
 
 
   text:{
     textAlign: 'left',
-    fontSize: 18,
+    fontSize: 14,
   },
 
   textPublicaciones:{
     textAlign: 'left',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
   },
 
@@ -131,23 +123,24 @@ const styles = StyleSheet.create({
   },
 
   image:{
-    height: 200,
-    width: 200,
-    borderRadius: 1000,
+    height: "80%",
+    width: "25%",
+    borderRadius: "40%",
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   card:{
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
+    flex: 2,
   },
 
   textCard:{
-    fontSize: 22,
+    fontSize: 14,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 25,
+    marginLeft: "5%",
   }
 
 

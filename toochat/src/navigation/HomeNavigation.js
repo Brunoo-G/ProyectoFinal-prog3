@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from '../screens/Home/Home'
 import Comments from '../screens/Comments/Comments'
-import usersProfile from '../screens/usersProfile/usersProfile'
+import UsersProfile from '../screens/UsersProfile/UsersProfile'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,8 +24,8 @@ class HomeNavigation extends Component {
         />
 
         <Stack.Screen 
-          name='usersProfile'
-          component={usersProfile}
+          name='UsersProfile'
+          component={UsersProfile}
           options={{
             headerShown:false
         }}

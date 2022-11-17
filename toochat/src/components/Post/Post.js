@@ -1,8 +1,8 @@
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet  } from 'react-native'
 import React, { Component } from 'react'
 import { db, auth } from '../../firebase/config'
 import firebase from 'firebase'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
 
 class Post extends Component {
     constructor(props){
@@ -12,6 +12,15 @@ class Post extends Component {
             cantidadLikes: props.data.likes.length,
             cantidadComentarios: props.data.comentarios.length,
             data: {},
+            miPost: false
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.data.email === auth.currentUser.email){
+            this.setState({
+                miPost: true,
+            })
         }
     }
 
@@ -57,6 +66,14 @@ class Post extends Component {
         .catch(err => console.log(err))
     }
 
+    eliminarPosteo(){
+        db.collection('posts')
+        .doc(this.props.id)
+        .delete()
+        .then(()=> {this.props.navigation.navigate('Profile')})
+        .catch(err=> console.log(err))
+    }
+
   render() {
 
     return (
@@ -68,7 +85,7 @@ class Post extends Component {
                 resizeMode = 'cover'
             />  
             <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {
-                screen: 'usersProfile',
+                screen: 'UsersProfile',
                 params:{
                     email: this.props.data.email
                 }
@@ -132,6 +149,13 @@ class Post extends Component {
             })}><Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
             </TouchableOpacity> 
         }
+
+            {
+                this.state.miPost ?
+                <TouchableOpacity onPress={()=> this.eliminarPosteo()}>
+                    <Text >BORRAR <AntDesign name="delete" size={20} color="black" /></Text>
+                </TouchableOpacity> : ''
+            }
        
       </View>
     )
@@ -161,7 +185,7 @@ const styles = StyleSheet.create({
     },
 
     image:{
-        height: 370,
+        height: 270,
         marginBottom: 5,
         alignItems: 'center',
         borderRadius: 10
