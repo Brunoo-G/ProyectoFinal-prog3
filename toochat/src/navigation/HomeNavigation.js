@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from '../screens/Home/Home'
-import Comments from '../screens/Comments/Comments'
 import UsersProfile from '../screens/UsersProfile/UsersProfile'
 
 const Stack = createNativeStackNavigator()
@@ -16,11 +15,6 @@ class HomeNavigation extends Component {
             options={{
                 headerShown:false
             }}
-        />
-
-        <Stack.Screen 
-            name='Comments'
-            component={Comments}
         />
 
         <Stack.Screen 

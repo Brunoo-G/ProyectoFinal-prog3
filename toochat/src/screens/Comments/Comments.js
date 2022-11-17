@@ -51,7 +51,7 @@ class Comments extends Component {
           onChangeText={text => this.setState({comentario: text})}
           value={this.state.comentario}
         />
-        <TouchableOpacity onPress={()=> this.guardarComentario(this.state.descripcion)}>
+        <TouchableOpacity onPress={()=> this.guardarComentario()}>
           <Text style={styles.button}>Publicar</Text>
         </TouchableOpacity>
       </View>
@@ -61,7 +61,9 @@ class Comments extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        marginRight: 10,
+        marginLeft: 10,
     },
     
     input:{
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       marginBottom: 5,
       padding: 10,
-      fontSize: 15,
+      fontSize: 15,   
       borderRadius: 5,
     },
 
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       borderWidth: 1,
       borderColor: '#ccc',
-      marginBottom: 5,
+      marginBottom: 10,
       fontWeight: 'bold',
       color:'#FFFFFF',
       fontSize: 17

@@ -52,16 +52,15 @@ class Search extends Component {
    render() {
   
     return( 
-        <View>
-            <Text>Search</Text>
-            <TextInput  
+        <View style={styles.container}>
+            <TextInput style={styles.input}
               onChangeText={ text => this.setState( {busqueda:text} )}
-              placeholder='Ingresa tu busqueda'
+              placeholder='¿A quién estas buscando?'
               value={this.state.busqueda}>
             </TextInput>
 
             <TouchableOpacity onPress={()=> this.buscar(this.state.busqueda)}>
-                <Text> Buscar</Text>
+                <Text style={styles.button}> Buscar</Text>
             </TouchableOpacity>
 
             <FlatList
@@ -69,18 +68,13 @@ class Search extends Component {
               keyExtractor={(item) => item.id}
               renderItem= {({item}) => <View>
                 
-                
-                
                 <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {
                   screen: 'UsersProfile',
                   params:{
                     email: item.data.email
                   }})}>
-                  <Text>{item.data.usuario}</Text>
+                  <Text style={styles.textUser}>{item.data.usuario}</Text>
                 </TouchableOpacity>  
-                
-                
-                
                 
                 </View>}
             /> 
@@ -89,5 +83,42 @@ class Search extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+
+  input:{
+    borderColor: '#ccc',
+    borderWidth: 2,
+    marginBottom: 5,
+    padding: 10,
+    fontSize: 15,
+    borderRadius: 5,
+  },
+
+  button:{
+    textAlign: 'center',
+    backgroundColor: '#0095F6',
+    padding: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginBottom: 5,
+    fontWeight: 'bold',
+    color:'#FFFFFF',
+    fontSize: 17
+  },
+
+  textUser:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 5
+  }
+})
 
 export default Search;

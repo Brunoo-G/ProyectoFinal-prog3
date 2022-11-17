@@ -24,15 +24,15 @@ class Post extends Component {
         }
     }
 
-    componentDidMount(){
-        db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
-            console.log(docs);
-          docs.forEach(doc => this.setState({
-            id: doc.id,
-            data: doc.data()
-          })) 
-        })
-      }
+    // componentDidMount(){
+    //     db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
+    //         console.log(docs);
+    //       docs.forEach(doc => this.setState({
+    //         id: doc.id,
+    //         data: doc.data()
+    //       })) 
+    //     })
+    //   }
 
     like(){
         db
@@ -111,12 +111,9 @@ class Post extends Component {
                     </TouchableOpacity>
             }
 
-            <TouchableOpacity style={{marginLeft: 8}} onPress={() => this.props.navigation.navigate('HomeNavigation', {
-                    screen: 'Comments',
-                    params: {
+            <TouchableOpacity style={{marginLeft: 8}} onPress={() => this.props.navigation.navigate('comments', {
                         id:this.props.id,
                         comentarios: this.props.data.comentarios
-                    }
                 })}> 
                 <Ionicons name="ios-chatbubble-outline"  color="black" size={30} />
             </TouchableOpacity>
@@ -128,24 +125,18 @@ class Post extends Component {
         {
             this.state.cantidadComentarios === 0 ? 
             <View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', { 
-                screen: 'Comments',
-                params: {
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', { 
                         id: this.props.id,
                         comentarios: this.props.data.comentarios
-                }
                 })}><Text style={styles.text}>Agregar comentario</Text> 
                 </TouchableOpacity>
 
                 <Text>Aún no hay comentarios</Text>
             </View>
             :
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeNavigation', {
-                screen: 'Comments',
-                params: {
-                    id: this.props.id,
-                    comentarios: this.props.data.comentarios
-                }
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {
+                id: this.props.id,
+                comentarios: this.props.data.comentarios
             })}><Text style={styles.text}>Ver los {this.state.cantidadComentarios} comentarios </Text> 
             </TouchableOpacity> 
         }
