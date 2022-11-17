@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import {db, auth} from '../../firebase/config'
 import Post from '../../components/Post/Post'
 
-class usersProfile extends Component {
+class UsersProfile extends Component {
 
     constructor(props){
         super(props)
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
   })
   
 
-export default usersProfile;
+export default UsersProfile;

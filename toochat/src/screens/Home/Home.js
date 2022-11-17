@@ -28,18 +28,20 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
         
         <Image style={styles.image}
           source={require('../../../assets/logo.png')}
           resizeMode = 'contain'
         />
+<View style={styles.subcontainer}>
 
         <FlatList 
         data = {this.state.posteos}
         keyExtractor = {(item) => item.id.toString()}
         renderItem = {(item) => <Post navigation={this.props.navigation} data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
         />
+</View>
       </View>
     )
   }
@@ -49,8 +51,11 @@ const styles = StyleSheet.create({
   container:{
     flex: 1
   },
-
+  subcontainer:{
+    flex:5
+  },
   image:{
+    
     height: 40,
     marginTop: 5,
     marginBottom: 10

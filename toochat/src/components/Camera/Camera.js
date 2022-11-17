@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React, { Component } from 'react'
 import { Camera } from 'expo-camera'
 import { storage } from '../../firebase/config'
+import { Ionicons } from '@expo/vector-icons'; 
 
 class Camara extends Component {
     constructor(){
@@ -67,9 +68,11 @@ class Camara extends Component {
                     type={Camera.Constants.Type.front}
                     ref={metodosDelComponente => this.metodosCamara = metodosDelComponente}
                 />
-                <TouchableOpacity onPress={()=> this.tomarFoto()}>
-                    <Text>Tomar foto</Text>
-                </TouchableOpacity>
+                <View style={styles.tomarFoto}>
+                    <TouchableOpacity onPress={()=> this.tomarFoto()}>
+                        <Ionicons name="radio-button-on" size={80} color="black" />
+                    </TouchableOpacity>
+                </View>
             </> 
 
             : this.state.mostrarCamara === false && this.state.fotoUri !== '' ?
@@ -79,14 +82,15 @@ class Camara extends Component {
                     style={styles.image}
                     source={{uri: this.state.fotoUri}}
                 />
+                <View style={styles.content}>
+                    <TouchableOpacity onPress={()=> this.aceptar(this.state.fotoUri)}>
+                        <Text style={styles.button} >Aceptar</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=> this.aceptar(this.state.fotoUri)}>
-                    <Text>Aceptar</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=> this.rechazar()}>
-                    <Text>Rechazar</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> this.rechazar()}>
+                        <Text style={styles.button} >Rechazar</Text>
+                    </TouchableOpacity>
+                </View>
             </> : 
             
             <Text>No tienes permiso para usar la Camara</Text>
@@ -98,16 +102,45 @@ class Camara extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
     },
 
     camara:{
-        height: 500
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight:10
     },
 
     image:{
-        height: 500
-    }
+        flex:1,
+        width:"100%",
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight:10
+    },
+
+    tomarFoto:{
+        alignItems: 'center'
+    },
+
+    content:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+    }, 
+    
+    button:{
+        textAlign: 'center',
+        backgroundColor: '#0095F6',
+        padding: 10,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        fontWeight: 'bold',
+        color:'#FFFFFF',
+        margin: 10,
+        marginTop: 17,
+        fontSize: 15
+    },
 })
 
 export default Camara

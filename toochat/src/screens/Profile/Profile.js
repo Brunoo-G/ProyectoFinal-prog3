@@ -44,17 +44,7 @@ class Profile extends Component {
     .then( resp => this.props.navigation.navigate('Login'))
     .catch(err => console.log(err))
   } 
-
-  borrarPosteo(){
-    auth.currentUser.delete()
-        .then( () => {
-            this.props.navigation.navigate("Portada")
-      } )
-
-  }
-
-
-
+  
   render() {
     console.log(this.state.misDatos)
     return (
@@ -128,7 +118,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: 5,
     fontWeight: 'bold',
-    color:'#FFFFFF'
+    color:'#FFFFFF',
+    fontSize: 17,
   },
 
   image:{

@@ -21,13 +21,15 @@ class Comments extends Component {
         usuario: auth.currentUser.email
       })
     })
+    .then( () => this.props.navigation.navigate('Login'))
+    .catch(err => console.log(err))
   }
 
   render() {
     console.log(this.props.route.params.id);
     return (
       <View style={styles.container}>
-        <Text>Comentarios</Text>
+        <Text style={styles.text}>Comentarios mas recientes</Text>
 
         <FlatList 
         data = {this.props.route.params.comentarios}
@@ -42,7 +44,7 @@ class Comments extends Component {
           value={this.state.comentario}
         />
         <TouchableOpacity onPress={()=> this.guardarComentario(this.state.descripcion)}>
-          <Text>Publicar</Text>
+          <Text style={styles.button}>Publicar</Text>
         </TouchableOpacity>
       </View>
     )
@@ -55,9 +57,33 @@ const styles = StyleSheet.create({
     },
     
     input:{
-        height: 32,
-        borderWidth: 1
-    }
+      borderColor: '#ccc',
+      borderWidth: 2,
+      marginBottom: 5,
+      padding: 10,
+      fontSize: 15,
+      borderRadius: 5,
+    },
+
+    button:{
+      textAlign: 'center',
+      backgroundColor: '#0095F6',
+      padding: 5,
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      marginBottom: 5,
+      fontWeight: 'bold',
+      color:'#FFFFFF',
+      fontSize: 17
+  },
+
+  text:{
+    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: 5
+  }
 })
 
 export default Comments
