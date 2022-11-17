@@ -42,8 +42,36 @@ class UsersProfile extends Component {
       })
     }
 
+    componentDidUpdate(){
+      db.collection('users')
+      .where('email', '==', this.props.route.params.email)
+      .onSnapshot(doc => {
+        doc.forEach(doc => this.setState({
+          id: doc.id,
+          misDatos: doc.data()
+        })) 
+      })
+      db.collection('posts')
+      .where('email', '==', this.props.route.params.email)
+      .onSnapshot(docs => {
+        let posts = []
+        docs.forEach(doc => {
+            posts.push({
+                id: doc.id,
+                data: doc.data()
+            })
+        })
+        console.log(posts)
+        this.setState({
+            posteos: posts,
+            loader: false
+        })
+    })
+  }
 
+   
   render() {
+    console.log(this.state)
     return (
         this.state.loader ? <Text>Cargandooo</Text> :
         <>
