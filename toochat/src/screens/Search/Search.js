@@ -72,7 +72,7 @@ class Search extends Component {
                 
                 
                 <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {
-                  screen: 'usersProfile',
+                  screen: 'UsersProfile',
                   params:{
                   email: this.props.data.email
                   }})}>
