@@ -10,9 +10,20 @@ class Post extends Component {
         this.state = {
             like: false,
             cantidadLikes: props.data.likes.length,
-            cantidadComentarios: props.data.comentarios.length
+            cantidadComentarios: props.data.comentarios.length,
+            data: {},
         }
     }
+
+    componentDidMount(){
+        db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
+            console.log(docs);
+          docs.forEach(doc => this.setState({
+            id: doc.id,
+            data: doc.data()
+          })) 
+        })
+      }
 
     like(){
         db
@@ -47,6 +58,7 @@ class Post extends Component {
     }
 
   render() {
+
     return (
       <View style={styles.container}>
 
