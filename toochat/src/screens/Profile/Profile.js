@@ -54,9 +54,9 @@ class Profile extends Component {
             source={{uri: this.state.misDatos.foto}} 
             resizeMode = 'cover'
           />
-          <View>
-            <Text style={styles.textCard}>Username: {this.state.misDatos.usuario}</Text>
-            <Text style={styles.textCard}>Email: {this.state.misDatos.email}</Text>
+          <View style={styles.usuarioYMail}>
+            <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
+            <Text style={styles.textCard}>{this.state.misDatos.email}</Text>
           </View>
         </View>      
         <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>   
@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
     flex: 8, 
   },
 
+  usuarioYMail:{
+    flexDirection: 'column' 
+  },
 
   text:{
     textAlign: 'left',
