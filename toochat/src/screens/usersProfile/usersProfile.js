@@ -76,26 +76,29 @@ class UsersProfile extends Component {
         this.state.loader ? <Text>Cargandooo</Text> :
         <>
         <View style={styles.container}>
-          <Text style={styles.text}>{this.state.misDatos.email}</Text>
           <View style={styles.card}>
             <Image style={styles.image}
-              source={{uri: this.state.misDatos.foto}} // falta que llamar a la foto de perfil de cada usuario
+              source={{uri: this.state.misDatos.foto}} 
               resizeMode = 'cover'
             />
-            <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
+            <View style={styles.usuarioYMail}>
+               <Text style={styles.textCard}>{this.state.misDatos.usuario}</Text>
+               <Text style={styles.textCard}>{this.state.misDatos.email}</Text>
+            </View>
           </View>      
           <Text style={styles.text}>Biografia: {this.state.misDatos.biografia}</Text>   
-          <Text>Cantidad de posts: {this.state.posteos.length}</Text>
-        </View>
-  
-        <View style={styles.container}>
-          <Text>Posteos</Text>
+          <Text style={styles.text}>Cantidad de posts: {this.state.posteos.length}</Text>
+
+          <Text style={styles.textPublicaciones}>Posteos</Text>
+
           {this.state.posteos.length >= 1 ? 
+          <View style={styles.publicaciones}>
           <FlatList 
-          data = {this.state.posteos}
-          keyExtractor = {(item) => item.id.toString()}
-          renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
+            data = {this.state.posteos}
+            keyExtractor = {(item) => item.id.toString()}
+            renderItem = {(item) => <Post data={item.item.data} id={item.item.id} />} // preguntar xq item.item (2 veces)
           />
+          </View>
           :
           <Text>Aun no hay publicaciones</Text>
           }
@@ -107,36 +110,66 @@ class UsersProfile extends Component {
 
 const styles = StyleSheet.create({
 
-    container:{
-      flex: 1, 
-      justifyContent: 'center',
-      paddingHorizontal: 32
-    },
-  
-    text:{
-      textAlign: 'center',
-      fontSize: 24,
-    },
-  
-    image:{
-      height: 130,
-      width: 130,
-      borderRadius: 1000,
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-  
-    card:{
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-  
-    textCard:{
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: 'black',
-      marginLeft: 20
-    }
+  container:{
+    flex: 1, 
+    justifyContent: 'center',
+    paddingHorizontal: 32,
+    backgroundColor: '#E0E4EA',
+  },
+
+  publicaciones:{
+    flex: 8, 
+  },
+
+  usuarioYMail:{
+    flexDirection: 'column' 
+  },
+
+  text:{
+    textAlign: 'left',
+    fontSize: 14,
+  },
+
+  textPublicaciones:{
+    textAlign: 'left',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+
+  botton:{
+    textAlign: 'center',
+    backgroundColor: '#0095F6',
+    padding: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginBottom: 5,
+    fontWeight: 'bold',
+    color:'#FFFFFF',
+    fontSize: 17,
+  },
+
+  image:{
+    height: "80%",
+    width: "25%",
+    borderRadius: "40%",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  card:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 2,
+  },
+
+  textCard:{
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: "5%",
+  }
+
   
   
   })
