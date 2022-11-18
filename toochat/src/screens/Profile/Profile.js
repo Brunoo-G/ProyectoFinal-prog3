@@ -46,7 +46,6 @@ class Profile extends Component {
   } 
   
   render() {
-    console.log(this.state.misDatos)
     return (
       <>
       <View style={styles.containerDatos}>

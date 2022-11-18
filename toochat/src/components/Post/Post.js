@@ -12,7 +12,7 @@ class Post extends Component {
             cantidadLikes: props.data.likes.length,
             cantidadComentarios: props.data.comentarios.length,
             data: {},
-            miPost: false
+            miPost: false,
         }
     }
 
@@ -22,17 +22,13 @@ class Post extends Component {
                 miPost: true,
             })
         }
+        db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
+          docs.forEach(doc => this.setState({
+            id: doc.id,
+            data: doc.data()
+          })) 
+        })
     }
-
-    // componentDidMount(){
-    //     db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
-    //         console.log(docs);
-    //       docs.forEach(doc => this.setState({
-    //         id: doc.id,
-    //         data: doc.data()
-    //       })) 
-    //     })
-    //   }
 
     like(){
         db
@@ -75,13 +71,12 @@ class Post extends Component {
     }
 
   render() {
-
     return (
       <View style={styles.container}>
 
         <View style={styles.profile}>
             <Image style={styles.imageProfile}
-                source={{uri: 'https://www.americatv.com.pe/cinescape/wp-content/uploads/2018/02/225981.jpg'}} // falta que llamar a la foto de perfil de cada usuario
+                source={{uri: this.state.data.foto}} // falta que llamar a la foto de perfil de cada usuario
                 resizeMode = 'cover'
             />  
             <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {
