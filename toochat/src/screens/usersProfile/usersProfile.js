@@ -34,7 +34,6 @@ class UsersProfile extends Component {
                   data: doc.data()
               })
           })
-          console.log(posts)
           this.setState({
               posteos: posts,
               loader: false
@@ -61,7 +60,6 @@ class UsersProfile extends Component {
                 data: doc.data()
             })
         })
-        console.log(posts)
         this.setState({
             posteos: posts,
             loader: false
@@ -71,7 +69,6 @@ class UsersProfile extends Component {
 
    
   render() {
-    console.log(this.state)
     return (
         this.state.loader ? <Text>Cargandooo</Text> :
         <>

@@ -22,7 +22,7 @@ class Post extends Component {
                 miPost: true,
             })
         }
-        db.collection('users').where('email', '==', auth.currentUser.email).onSnapshot(docs => {
+        db.collection('users').where('email', '==', this.props.data.email).onSnapshot(docs => {
           docs.forEach(doc => this.setState({
             id: doc.id,
             data: doc.data()
