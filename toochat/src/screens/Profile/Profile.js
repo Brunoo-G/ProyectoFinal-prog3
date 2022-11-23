@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
   },
 
   usuarioYMail:{
-    flexDirection: 'column' 
+    flexDirection: 'column',
+    width: '100%'
   },
 
   text:{
