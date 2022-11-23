@@ -76,7 +76,7 @@ class Post extends Component {
 
         <View style={styles.profile}>
             <Image style={styles.imageProfile}
-                source={{uri: this.state.data.foto}} // falta que llamar a la foto de perfil de cada usuario
+                source={{uri: this.state.data.foto}} 
                 resizeMode = 'cover'
             />  
             <TouchableOpacity onPress={()=> this.props.navigation.navigate('HomeNavigation', {

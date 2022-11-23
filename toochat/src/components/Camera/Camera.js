@@ -35,7 +35,7 @@ class Camara extends Component {
 
     aceptar(url){
         fetch(url)
-        .then(img => img.blob()) // parceo la imagen en binario
+        .then(img => img.blob()) // parceo la imagen en binario a un formato valido para js
         .then(imagenOk =>{
             const ref = storage.ref(`fotos/${Date.now()}.jpg`) // guardo la imagen en el storage de firebase
             ref.put(imagenOk)

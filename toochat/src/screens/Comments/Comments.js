@@ -14,7 +14,7 @@ class Comments extends Component {
   }
 
   componentDidMount(){
-    db.collection('posts').doc(this.props.route.params.id).onSnapshot(docs => { // al pasarlo por id recibo un solo posteo
+    db.collection('posts').doc(this.props.route.params.id).onSnapshot(docs => { 
       this.setState({
         comentarios: docs.data().comentarios
       })
@@ -30,8 +30,11 @@ class Comments extends Component {
         usuario: auth.currentUser.email
       })
     })
-    .then()
     .catch(err => console.log(err))
+    
+    this.setState({
+      comentario: ''
+    })
   }
 
   render() {
