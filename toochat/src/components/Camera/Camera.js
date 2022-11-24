@@ -25,7 +25,7 @@ class Camara extends Component {
 
     tomarFoto(){
         this.metodosCamara.takePictureAsync()
-        .then( img => this.setState({  // guardo la img almacenada como un espacio en memoria temporal
+        .then( img => this.setState({  // guardo la img en espacio en memoria temporal 
             fotoUri: img.uri, 
             mostrarCamara: false
         }))

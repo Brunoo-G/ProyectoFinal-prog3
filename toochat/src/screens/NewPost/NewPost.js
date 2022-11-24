@@ -25,6 +25,12 @@ class NewPosts extends Component {
         })
         .then( () => this.props.navigation.navigate('Home'))
         .catch( err => this.setState({error:err.message}))
+
+        this.setState({
+            descripcion: '',
+            mostrarCamara: true,
+            fotoUrl: ''
+        })  
     }
 
     subirFoto(url){
